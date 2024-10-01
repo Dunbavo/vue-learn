@@ -6,24 +6,36 @@ defineProps({
 })
 
 const count = ref(0)
+
 const rawHtml = '<span style="color: red">Красный текст.</span>'
+
 const isButtonDisabled = true
+
 const objectOfAttrs = {
   id: 'container',
   class: 'wrapper',
   style: 'background-color:grey; color:white; border-radius:5px'
 }
+function numder() {
+  return Math.round(Math.random () * 100);
+}
+
+const message = 'строка'
+
+function data() {
+    return {
+      imageAttr: 'src',  // Атрибут, который будет динамически подставлен (src)
+      imageSrc: 'https://avatars.dzeninfra.ru/get-zen_doc/4909844/pub_63f610bd43c2e373bc2a7f3e_63f610fb593b986e4c72b199/scale_1200'  // Значение для src
+    };
+}
+
 </script>
 
 <template>
-  <h1>{{ msg }}</h1> <!-- как сюда попадает "Vite + Vue"? -->
+  <h1>{{ msg }}</h1>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
-<!--    <p>-->
-<!--      Edit-->
-<!--      <code>components/HelloWorld.vue</code> to test HMR-->
-<!--    </p>-->
   </div>
 
   <p>Двойные фигурные скобки: {{ rawHtml }}</p>
@@ -33,25 +45,22 @@ const objectOfAttrs = {
 
   <p v-bind="objectOfAttrs">Динамическая привязка нескольких атрибутов</p>
 
-<!--  <p>-->
-<!--    Check out-->
-<!--    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"-->
-<!--      >create-vue</a-->
-<!--    >, the official Vue + Vite starter-->
-<!--  </p>-->
-<!--  <p>-->
-<!--    Learn more about IDE Support for Vue in the-->
-<!--    <a-->
-<!--      href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support"-->
-<!--      target="_blank"-->
-<!--      >Vue Docs Scaling up Guide</a-->
-<!--    >.-->
-<!--  </p>-->
-<!--  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>-->
+  <p>Рандомное число + 1: {{ numder() + 1 }}</p>
+
+<!--  <input type="text" value="'YES' или 'NO'?" />-->
+
+  <p>'true' или 'false'?<br>{{ ok ? 'ok = true' : 'ok = false' }}</p>
+
+  <p>Строка => {{ message.split('').reverse().join('') }}</p>
+
+  <p v-if="isButtonDisabled">Сейчас меня видно</p>
+
+  <div>
+    <img v-bind:[imageAttr]="imageSrc" alt="Dynamic Image">
+  </div>
+
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
+
 </style>
